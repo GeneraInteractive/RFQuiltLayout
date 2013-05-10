@@ -6,11 +6,12 @@
 //  Copyright (c) 2012 Bryce Redd. All rights reserved.
 //
 
+#import "PSTCollectionView.h"
 #import "RFViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface RFViewController ()
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet PSTCollectionView *collectionView;
 @property (nonatomic) NSMutableArray* numbers;
 @end
 
@@ -23,10 +24,10 @@ int num = 0;
     self.numbers = [@[] mutableCopy];
     for(; num<50; num++) { [self.numbers addObject:@(num)]; }
     
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+    [self.collectionView registerClass:[PSTCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     
     RFQuiltLayout* layout = (id)[self.collectionView collectionViewLayout];
-    layout.direction = UICollectionViewScrollDirectionVertical;
+    layout.direction = PSTCollectionViewScrollDirectionVertical;
     layout.blockPixels = CGSizeMake(100, 100);
     
     [self.collectionView reloadData];
@@ -64,8 +65,8 @@ int num = 0;
     return self.numbers.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+- (PSTCollectionViewCell *)collectionView:(PSTCollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    PSTCollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     cell.backgroundColor = [self colorForNumber:self.numbers[indexPath.row]];
     
     UILabel* label = (id)[cell viewWithTag:5];
